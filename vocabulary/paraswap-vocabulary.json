@@ -1,0 +1,86 @@
+{
+  "name": "ParaSwap / Velora API Vocabulary",
+  "description": "Key domain terms and concepts used in the ParaSwap (Velora) DEX aggregator APIs.",
+  "terms": [
+    {
+      "term": "DEX Aggregator",
+      "definition": "A service that sources liquidity from multiple decentralized exchanges (DEXes) simultaneously to find the best available swap rate for a given token pair and amount."
+    },
+    {
+      "term": "Price Route",
+      "definition": "The optimal path for swapping one token to another, including all intermediate hops, DEX allocations, gas estimates, and USD valuations. Returned by /prices and must be passed unmodified to /transactions."
+    },
+    {
+      "term": "Augustus Router",
+      "definition": "ParaSwap's smart contract router (named after Augustus, the Roman emperor) that executes token swaps on-chain. Referenced by contractAddress in the PriceRoute."
+    },
+    {
+      "term": "Token Transfer Proxy",
+      "definition": "A smart contract that handles ERC-20 token approvals. Users approve this address (not the Augustus router) to transfer their tokens."
+    },
+    {
+      "term": "SELL side",
+      "definition": "A swap where the user specifies the exact amount of source token to spend. The destination amount is variable."
+    },
+    {
+      "term": "BUY side",
+      "definition": "A swap where the user specifies the exact amount of destination token to receive. The source amount is variable."
+    },
+    {
+      "term": "HMAC",
+      "definition": "Hash-based Message Authentication Code appended to the PriceRoute to prevent tampering. The API validates this when /transactions is called."
+    },
+    {
+      "term": "Slippage",
+      "definition": "The acceptable difference (in basis points) between the expected and actual swap price. 100 basis points = 1%. Used to protect users from price movement between quoting and execution."
+    },
+    {
+      "term": "Max Impact Reached",
+      "definition": "Boolean flag set to true when the estimated price impact of the swap exceeds the configured maximum threshold (typically around 15%). Swaps may still be executable but carry high slippage risk."
+    },
+    {
+      "term": "Split Route",
+      "definition": "When the bestRoute array contains multiple entries, the swap volume is split across different DEX paths to achieve better pricing through reduced price impact."
+    },
+    {
+      "term": "Permit",
+      "definition": "An EIP-2612 off-chain signature that authorizes token spending without a separate on-chain approval transaction, reducing gas costs."
+    },
+    {
+      "term": "Partner Fee",
+      "definition": "A protocol-level fee (in basis points) that dApp integrators can charge on top of swaps. Configured via the partner and partnerFeePercent parameters."
+    },
+    {
+      "term": "MEV Protection",
+      "definition": "Maximal Extractable Value protection. The Delta API provides MEV protection by using the Portikus Intents network where multiple agents compete to execute swaps off-chain before settlement."
+    },
+    {
+      "term": "Delta Order",
+      "definition": "An EIP-712 signed intent (not an on-chain transaction) submitted to the Delta API for gas-less swap execution. Competing agents (fillers) claim the best execution and settle on-chain."
+    },
+    {
+      "term": "AugustusRFQ",
+      "definition": "ParaSwap's on-chain limit order and Request-for-Quote system that allows market makers to provide signed firm quotes for token pairs via a standardized HTTP API."
+    },
+    {
+      "term": "Portikus Intents",
+      "definition": "The intent-based execution network used by the Delta API where multiple solvers compete to fill user swap orders at the best price."
+    },
+    {
+      "term": "EVM",
+      "definition": "Ethereum Virtual Machine. ParaSwap supports 12 EVM-compatible chains including Ethereum, Polygon, BNB Chain, Arbitrum, Optimism, Base, and Avalanche."
+    },
+    {
+      "term": "Network ID",
+      "definition": "Numeric identifier for a blockchain network. Ethereum Mainnet = 1, Polygon = 137, BNB Chain = 56. Used as path and query parameters throughout the API."
+    },
+    {
+      "term": "Best Route",
+      "definition": "The array of optimal swap routes computed by ParaSwap's algorithm across all integrated DEXes, representing the path that maximizes the output amount."
+    },
+    {
+      "term": "Gas Cost USD",
+      "definition": "The estimated cost of executing the swap transaction in USD terms, accounting for the current gas price and ETH/gas token market price."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "description": "Example: Get best price for swapping 1 ETH to USDC on Ethereum Mainnet",
+  "request": {
+    "method": "GET",
+    "url": "https://apiv5.paraswap.io/prices",
+    "queryParameters": {
+      "srcToken": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "srcDecimals": 18,
+      "destToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "destDecimals": 6,
+      "amount": "1000000000000000000",
+      "side": "SELL",
+      "network": 1
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "body": {
+      "priceRoute": {
+        "blockNumber": 13015909,
+        "network": 1,
+        "srcToken": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "srcDecimals": 18,
+        "srcAmount": "1000000000000000000",
+        "destToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "destDecimals": 6,
+        "destAmount": "3273085640",
+        "bestRoute": [
+          {
+            "percent": 100,
+            "swaps": [
+              {
+                "srcToken": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+                "srcDecimals": 18,
+                "destToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "destDecimals": 6,
+                "swapExchanges": [
+                  {
+                    "exchange": "UniswapV2",
+                    "srcAmount": "1000000000000000000",
+                    "destAmount": "3273085640",
+                    "percent": 100,
+                    "data": {
+                      "router": "0x0000000000000000000000000000000000000000",
+                      "path": [
+                        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+                        "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+                      ],
+                      "factory": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
+                      "initCode": "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f",
+                      "feeFactor": 10000,
+                      "pools": [
+                        {
+                          "address": "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc",
+                          "fee": 30,
+                          "direction": false
+                        }
+                      ],
+                      "gasUSD": "11.730851"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "gasCostUSD": "16.340342",
+        "gasCost": "111435",
+        "side": "SELL",
+        "tokenTransferProxy": "0x216b4b4ba9f3e719726886d34a177484278bfcae",
+        "contractAddress": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+        "contractMethod": "swapOnUniswap",
+        "partnerFee": 0,
+        "srcUSD": "3276.8800000000",
+        "destUSD": "3269.3903263124",
+        "partner": "paraswap.io",
+        "maxImpactReached": false,
+        "hmac": "319c5cf83098a07aeebb11bed6310db51311201f"
+      }
+    }
+  }
+}

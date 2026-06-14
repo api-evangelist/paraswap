@@ -1,0 +1,249 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/paraswap/main/json-schema/price-route.json",
+  "title": "ParaSwap PriceRoute",
+  "description": "The optimal swap route and pricing data returned by the ParaSwap /prices endpoint. Pass this object unmodified to /transactions to build a transaction.",
+  "type": "object",
+  "required": [
+    "blockNumber",
+    "network",
+    "srcToken",
+    "srcDecimals",
+    "srcAmount",
+    "destToken",
+    "destDecimals",
+    "destAmount",
+    "bestRoute",
+    "gasCost",
+    "gasCostUSD",
+    "side",
+    "tokenTransferProxy",
+    "contractAddress",
+    "contractMethod",
+    "srcUSD",
+    "destUSD",
+    "partner",
+    "partnerFee",
+    "maxImpactReached",
+    "hmac"
+  ],
+  "properties": {
+    "blockNumber": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Block number at which the price was computed.",
+      "example": 13015909
+    },
+    "network": {
+      "$ref": "#/definitions/Network"
+    },
+    "srcToken": {
+      "type": "string",
+      "description": "Source token contract address.",
+      "example": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+    },
+    "srcDecimals": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Decimal precision of the source token."
+    },
+    "srcAmount": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "description": "Amount of source token in its smallest denomination.",
+      "example": "1000000000000000000"
+    },
+    "destToken": {
+      "type": "string",
+      "description": "Destination token contract address.",
+      "example": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    },
+    "destDecimals": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Decimal precision of the destination token."
+    },
+    "destAmount": {
+      "type": "string",
+      "pattern": "^\\d+$",
+      "description": "Amount of destination token in its smallest denomination.",
+      "example": "3273085640"
+    },
+    "bestRoute": {
+      "type": "array",
+      "description": "Array of optimal route segments comprising the swap.",
+      "items": {
+        "$ref": "#/definitions/OptimalRoute"
+      }
+    },
+    "others": {
+      "type": "array",
+      "description": "Comparison quotes from other exchanges, populated when otherExchangePrices=true is passed to /prices.",
+      "items": {
+        "$ref": "#/definitions/OptionalRate"
+      }
+    },
+    "gasCost": {
+      "type": "string",
+      "description": "Estimated gas units for the swap.",
+      "example": "111435"
+    },
+    "gasCostUSD": {
+      "type": "string",
+      "description": "Estimated gas cost in USD.",
+      "example": "11.947163"
+    },
+    "side": {
+      "$ref": "#/definitions/SwapSide"
+    },
+    "tokenTransferProxy": {
+      "type": "string",
+      "description": "Address of the token transfer proxy contract.",
+      "example": "0x3e7d31751347BAacf35945074a4a4A41581B2271"
+    },
+    "contractAddress": {
+      "type": "string",
+      "description": "Address of the Augustus router contract to use.",
+      "example": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57"
+    },
+    "contractMethod": {
+      "type": "string",
+      "description": "Augustus router method to call.",
+      "example": "swapOnUniswap"
+    },
+    "srcUSD": {
+      "type": "string",
+      "description": "USD value of the source amount.",
+      "example": "3230.3000000000"
+    },
+    "destUSD": {
+      "type": "string",
+      "description": "USD value of the destination amount.",
+      "example": "3218.9300566052"
+    },
+    "partner": {
+      "type": "string",
+      "description": "Partner identifier.",
+      "example": "paraswap.io"
+    },
+    "partnerFee": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Partner fee in basis points.",
+      "example": 0
+    },
+    "maxImpactReached": {
+      "type": "boolean",
+      "description": "True if price impact exceeds maximum threshold.",
+      "example": false
+    },
+    "hmac": {
+      "type": "string",
+      "description": "HMAC signature to verify route integrity.",
+      "example": "319c5cf83098a07aeebb11bed6310db51311201f"
+    }
+  },
+  "definitions": {
+    "Network": {
+      "type": "number",
+      "description": "Blockchain network ID.",
+      "enum": [1, 3, 56, 137]
+    },
+    "SwapSide": {
+      "type": "string",
+      "description": "Whether the specified amount is for the source token (SELL) or destination token (BUY).",
+      "enum": ["SELL", "BUY"]
+    },
+    "OptimalRoute": {
+      "type": "object",
+      "required": ["percent", "swaps"],
+      "properties": {
+        "percent": {
+          "type": "number",
+          "description": "Percentage of total swap volume routed through this path.",
+          "example": 100
+        },
+        "swaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptimalSwap"
+          }
+        }
+      }
+    },
+    "OptimalSwap": {
+      "type": "object",
+      "required": ["srcToken", "srcDecimals", "destToken", "destDecimals", "swapExchanges"],
+      "properties": {
+        "srcToken": {
+          "type": "string"
+        },
+        "srcDecimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "destToken": {
+          "type": "string"
+        },
+        "destDecimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "swapExchanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptimalSwapExchange"
+          }
+        }
+      }
+    },
+    "OptimalSwapExchange": {
+      "type": "object",
+      "required": ["exchange", "srcAmount", "destAmount", "percent"],
+      "properties": {
+        "exchange": {
+          "type": "string",
+          "description": "Name of the DEX used for this swap leg.",
+          "example": "UniswapV2"
+        },
+        "srcAmount": {
+          "type": "string",
+          "example": "1000000000000000000"
+        },
+        "destAmount": {
+          "type": "string",
+          "example": "3273085640"
+        },
+        "percent": {
+          "type": "number",
+          "example": 100
+        },
+        "data": {
+          "type": "object",
+          "description": "Exchange-specific routing data."
+        }
+      }
+    },
+    "OptionalRate": {
+      "type": "object",
+      "required": ["exchange", "srcAmount", "destAmount"],
+      "properties": {
+        "exchange": {
+          "type": "string"
+        },
+        "srcAmount": {
+          "type": "string"
+        },
+        "destAmount": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "description": "Example: Retrieve the curated list of tokens supported on Ethereum Mainnet",
+  "request": {
+    "method": "GET",
+    "url": "https://apiv5.paraswap.io/tokens/1"
+  },
+  "response": {
+    "statusCode": 200,
+    "body": {
+      "tokens": [
+        {
+          "symbol": "ETH",
+          "address": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+          "decimals": 18,
+          "img": "https://img.paraswap.network/ETH.png",
+          "network": 1,
+          "newToken": false,
+          "connectors": [],
+          "tokenType": "ETH"
+        },
+        {
+          "symbol": "USDT",
+          "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+          "decimals": 6,
+          "img": "https://img.paraswap.network/USDT.png",
+          "network": 1,
+          "newToken": false,
+          "connectors": [],
+          "tokenType": "ERC20"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "decimals": 6,
+          "img": "https://img.paraswap.network/USDC.png",
+          "network": 1,
+          "newToken": false,
+          "connectors": [],
+          "tokenType": "ERC20"
+        },
+        {
+          "symbol": "DAI",
+          "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+          "decimals": 18,
+          "img": "https://img.paraswap.network/DAI.png",
+          "network": 1,
+          "newToken": false,
+          "connectors": [],
+          "tokenType": "ERC20"
+        }
+      ]
+    }
+  }
+}

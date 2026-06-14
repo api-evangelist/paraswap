@@ -1,0 +1,166 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "paraswap": "https://api-evangelist.github.io/paraswap/vocab#",
+    "defi": "https://ontology.defi.org/",
+    "evm": "https://ontology.ethereum.org/",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "image": "schema:image",
+    "identifier": "schema:identifier",
+
+    "Provider": "schema:Organization",
+    "API": "schema:WebAPI",
+    "apiVersion": "schema:version",
+    "termsOfService": "schema:termsOfService",
+    "documentationUrl": "schema:documentation",
+
+    "Token": {
+      "@id": "paraswap:Token",
+      "@type": "@id"
+    },
+    "tokenSymbol": {
+      "@id": "paraswap:symbol",
+      "@type": "xsd:string"
+    },
+    "tokenAddress": {
+      "@id": "evm:contractAddress",
+      "@type": "xsd:string"
+    },
+    "tokenDecimals": {
+      "@id": "paraswap:decimals",
+      "@type": "xsd:integer"
+    },
+    "tokenType": {
+      "@id": "paraswap:tokenType",
+      "@type": "@vocab"
+    },
+    "networkId": {
+      "@id": "evm:networkId",
+      "@type": "xsd:integer"
+    },
+
+    "PriceRoute": {
+      "@id": "paraswap:PriceRoute",
+      "@type": "@id"
+    },
+    "SwapSide": {
+      "@id": "paraswap:SwapSide",
+      "@type": "@vocab"
+    },
+    "srcToken": {
+      "@id": "paraswap:sourceToken",
+      "@type": "xsd:string"
+    },
+    "destToken": {
+      "@id": "paraswap:destinationToken",
+      "@type": "xsd:string"
+    },
+    "srcAmount": {
+      "@id": "paraswap:sourceAmount",
+      "@type": "xsd:string"
+    },
+    "destAmount": {
+      "@id": "paraswap:destinationAmount",
+      "@type": "xsd:string"
+    },
+    "gasCost": {
+      "@id": "evm:gasEstimate",
+      "@type": "xsd:string"
+    },
+    "gasCostUSD": {
+      "@id": "paraswap:gasCostUSD",
+      "@type": "xsd:string"
+    },
+    "contractAddress": {
+      "@id": "evm:contractAddress",
+      "@type": "xsd:string"
+    },
+    "contractMethod": {
+      "@id": "evm:functionName",
+      "@type": "xsd:string"
+    },
+    "blockNumber": {
+      "@id": "evm:blockNumber",
+      "@type": "xsd:integer"
+    },
+    "hmac": {
+      "@id": "paraswap:routeIntegrityHash",
+      "@type": "xsd:string"
+    },
+    "maxImpactReached": {
+      "@id": "paraswap:maxPriceImpactReached",
+      "@type": "xsd:boolean"
+    },
+    "partnerFee": {
+      "@id": "paraswap:partnerFeeBasisPoints",
+      "@type": "xsd:integer"
+    },
+
+    "SwapRoute": {
+      "@id": "paraswap:SwapRoute",
+      "@type": "@id"
+    },
+    "bestRoute": {
+      "@id": "paraswap:optimalRoute",
+      "@type": "@id"
+    },
+    "percent": {
+      "@id": "paraswap:routeAllocationPercent",
+      "@type": "xsd:decimal"
+    },
+    "exchange": {
+      "@id": "defi:decentralizedExchange",
+      "@type": "xsd:string"
+    },
+
+    "Transaction": {
+      "@id": "evm:Transaction",
+      "@type": "@id"
+    },
+    "from": {
+      "@id": "evm:fromAddress",
+      "@type": "xsd:string"
+    },
+    "to": {
+      "@id": "evm:toAddress",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "evm:txValue",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "evm:txData",
+      "@type": "xsd:string"
+    },
+    "gasPrice": {
+      "@id": "evm:gasPrice",
+      "@type": "xsd:string"
+    },
+    "gas": {
+      "@id": "evm:gasLimit",
+      "@type": "xsd:string"
+    },
+    "chainId": {
+      "@id": "evm:chainId",
+      "@type": "xsd:integer"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "https://api.paraswap.io",
+      "@type": "API",
+      "name": "ParaSwap / Velora API",
+      "description": "DEX aggregator APIs providing optimal swap routing across 170+ DEXes on 12 EVM-compatible chains.",
+      "url": "https://developers.velora.xyz/",
+      "provider": {
+        "@type": "Provider",
+        "name": "ParaSwap / Velora",
+        "url": "https://www.velora.xyz/"
+      }
+    }
+  ]
+}
