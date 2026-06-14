@@ -1,0 +1,61 @@
+name: ParaSwap API FinOps
+description: ParaSwap (Velora) operates a free public API for core DEX aggregation functionality with no direct API usage fees. Revenue is generated through a protocol-level fee model embedded in swap execution — partners and integrators can optionally participate and earn revenue share. On-chain gas costs are borne by the user for Market API swaps; Delta API swaps are gas-less for users as agents cover execution costs.
+url: https://www.velora.xyz/
+created: '2026-06-14'
+modified: '2026-06-14'
+costModel:
+  type: Free + Partner Revenue Share
+  description: The ParaSwap API itself has no direct per-call usage fees on the public tier. Costs and revenue flows are embedded in the swap execution layer through protocol fees and a partner fee model.
+
+costComponents:
+  - name: API Usage (Public Tier)
+    type: Fixed
+    cost: $0
+    unit: per API call
+    description: All public REST API endpoints — /prices, /transactions, /swap, /tokens, /quote, Delta order endpoints — are freely accessible with no per-call charges.
+
+  - name: API Usage (Dedicated Enterprise Tier)
+    type: Subscription
+    cost: Contact sales
+    unit: per month
+    description: Dedicated API keys for enterprise/corporate clients with higher throughput guarantees. Reported tier range is approximately $199–$799/month depending on usage volume.
+
+  - name: Partner Flat Fee
+    type: Variable
+    cost: Up to 2% of swap amount
+    unit: per swap
+    description: Partners integrating via the API can configure a flat fee on top of each swap amount. The fee is taken on-chain and sent to the partner's configured address. Capped at 2% per swap in API v6.2.
+
+  - name: Partner Surplus Fee
+    type: Variable
+    cost: Up to 50% of positive price surplus
+    unit: per swap
+    description: Instead of a flat fee, partners can opt for a surplus-sharing model where they receive up to 50% of any positive surplus (difference between quoted and executed price). In v6.2, surplus fees are capped at 1% of swap amount.
+
+  - name: On-Chain Gas (Market API)
+    type: Variable
+    cost: Market-rate gas
+    unit: per transaction
+    description: For Market API swaps, the user pays on-chain gas fees to execute the swap transaction. Gas estimates are provided in the /prices response (gasCost field in USD). EIP-1559 transaction format is supported.
+
+  - name: On-Chain Gas (Delta API)
+    type: Fixed (user-side)
+    cost: $0 for user
+    unit: per swap
+    description: Delta API swaps are gas-less for end users. Executing agents (solvers) cover gas costs and compete to offer the best net price. Agents recover costs through the swap surplus.
+
+optimizationTips:
+  - name: Use /swap Endpoint
+    description: The GET /swap endpoint combines /prices and /transactions into one call, halving API call volume for simple swap use cases and reducing latency.
+  - name: Cache Token Lists
+    description: The /tokens/:network response rarely changes. Cache it locally for 24+ hours to eliminate repeated calls and reduce rate limit pressure.
+  - name: Cache Price Routes Briefly
+    description: The priceRoute object from /prices is valid for a short window. Cache it client-side and reuse it in the /transactions call within the same user session.
+  - name: Use ignoreGasEstimate for Speed
+    description: Passing ignoreGasEstimate=true on /transactions skips on-chain gas estimation, reducing latency when you have your own gas strategy.
+  - name: Prefer Delta API for Gas-Sensitive UX
+    description: For end-user wallets and retail dApps, the Delta API provides a gas-less experience that improves conversion and reduces user friction at no API cost.
+  - name: Choose Surplus vs Flat Fee Strategically
+    description: For high-volume, low-value swaps, a flat fee model provides predictable revenue. For lower-volume, high-value swaps, the surplus model may yield more. Choose based on your swap size distribution.
+  - name: Partner Registration
+    description: Registering as a partner with Velora gives access to dedicated API keys, priority support, and potentially better rate limits — worth pursuing for production applications processing significant volume.

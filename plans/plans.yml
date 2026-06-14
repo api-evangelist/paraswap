@@ -1,0 +1,62 @@
+name: ParaSwap API Plans
+description: ParaSwap (Velora) offers a free public API tier for developers building DeFi integrations, with dedicated API key tiers available for production applications requiring higher reliability and throughput. A partner program enables dApps and wallets to earn a share of swap surplus or charge flat fees through the partner fee model built into the API.
+url: https://www.velora.xyz/
+created: '2026-06-14'
+modified: '2026-06-14'
+plans:
+  - name: Public API (Free)
+    description: Open access to the ParaSwap REST API with no API key required. Suitable for development, prototyping, and low-volume integrations. Includes access to all core endpoints — /prices, /transactions, /swap, /tokens, and Delta API endpoints — across all 12 supported networks.
+    url: https://developers.velora.xyz/api/velora-api
+    rateLimits:
+      - type: Requests
+        limit: Not published
+        period: Not published
+        notes: Rate limiting is enforced (HTTP 429 returned on excess). Specific limits not publicly documented.
+    features:
+      - GET /prices — optimal swap route and price quote
+      - POST /transactions — build transaction call data
+      - GET /swap — combined price and calldata
+      - GET /tokens/:network — token list per chain
+      - Delta API — gas-less intent-based swaps
+      - AugustusRFQ — limit orders and P2P
+      - All 12 EVM networks supported
+      - No API key required
+    authentication: None required for public endpoints
+    pricing:
+      model: Free
+      cost: $0
+
+  - name: Dedicated API (Enterprise)
+    description: Dedicated API keys and enhanced infrastructure for production dApps, wallets, and platforms requiring high reliability, throughput guarantees, and dedicated support. Available to corporate clients and established DeFi projects.
+    url: https://www.velora.xyz/
+    rateLimits:
+      - type: Requests
+        limit: Custom
+        period: Custom
+        notes: Throughput guarantees negotiated per client; published tiers reportedly range from $199–$799/month based on usage level.
+    features:
+      - All Public API features
+      - Dedicated API keys
+      - Higher rate limits and throughput
+      - Priority infrastructure
+      - Dedicated support
+      - Custom fee model configuration
+    authentication: API key (dedicated, issued on request)
+    pricing:
+      model: Subscription
+      cost: Contact sales
+
+  - name: Partner Program
+    description: Enables wallets, dApps, and aggregators to integrate ParaSwap and earn revenue through the built-in partner fee model. Partners specify a partner identifier and partnerAddress in API calls to receive a share of swap surplus or charge flat fees (up to 2%) on top of swap amounts.
+    url: https://developers.velora.xyz/api/velora-api/velora-market-api
+    features:
+      - Revenue share on swap surplus (surplus model)
+      - Flat fee up to 2% per swap (flat fee model)
+      - Delta API fee models — surplus or flat fee up to 2%
+      - Fee directed to partnerAddress on-chain
+      - Surplus capped at 1% in v6.2 fee model
+      - No upfront cost — earn from live swap volume
+    authentication: None required; partner ID passed as query parameter
+    pricing:
+      model: Revenue Share
+      cost: Free to join; earnings from swap volume

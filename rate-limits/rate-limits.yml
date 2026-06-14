@@ -1,0 +1,83 @@
+name: ParaSwap API Rate Limits
+description: ParaSwap (Velora) enforces rate limiting on its public REST API at https://api.paraswap.io. Specific numerical limits are not publicly documented. HTTP 429 (Too Many Requests) is returned when limits are exceeded. Exponential backoff is the recommended retry strategy. Dedicated API key holders receive higher (negotiated) throughput. The Delta API and AugustusRFQ endpoints share the same base URL and are subject to the same rate limiting policy.
+url: https://developers.velora.xyz/api/velora-api
+created: '2026-06-14'
+modified: '2026-06-14'
+rateLimits:
+  - api: ParaSwap Market API
+    endpoint: GET /prices
+    tier: Public (no API key)
+    limit: Not published
+    period: Not published
+    burstLimit: Not published
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Exponential backoff on 429 responses is recommended by downstream integrators. ParaSwap has not published specific RPS or RPM thresholds in public documentation.
+
+  - api: ParaSwap Market API
+    endpoint: POST /transactions/:network
+    tier: Public (no API key)
+    limit: Not published
+    period: Not published
+    burstLimit: Not published
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Shares rate limit policy with the /prices endpoint. Ignoring balance/allowance checks (ignoreChecks=true) may reduce latency but does not affect rate limits.
+
+  - api: ParaSwap Market API
+    endpoint: GET /swap
+    tier: Public (no API key)
+    limit: Not published
+    period: Not published
+    burstLimit: Not published
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Combined price + calldata endpoint; same limits as /prices and /transactions.
+
+  - api: ParaSwap Delta API
+    endpoint: GET /quote
+    tier: Public (no API key)
+    limit: Not published
+    period: Not published
+    burstLimit: Not published
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Delta API quote endpoint. Ethereum and Base networks only.
+
+  - api: ParaSwap Delta API
+    endpoint: POST /delta/orders/build
+    tier: Public (no API key)
+    limit: Not published
+    period: Not published
+    burstLimit: Not published
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Order construction endpoint; EIP-712 signed orders, not subject to gas.
+
+  - api: ParaSwap Tokens API
+    endpoint: GET /tokens/:network
+    tier: Public (no API key)
+    limit: Not published
+    period: Not published
+    burstLimit: Not published
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Token list endpoint is typically low-frequency; results are suitable for caching client-side.
+
+  - api: Dedicated API (Enterprise)
+    endpoint: All endpoints
+    tier: Dedicated API key
+    limit: Custom (negotiated)
+    period: Custom
+    burstLimit: Custom
+    statusCode: 429
+    retryHeader: Retry-After
+    notes: Higher throughput and reliability SLAs negotiated per enterprise client. Contact Velora sales for terms.
+
+policies:
+  - name: Exponential Backoff
+    description: On receiving HTTP 429, clients should implement exponential backoff with jitter before retrying. This is the standard recommendation from the ParaSwap ecosystem.
+  - name: Client-Side Caching
+    description: Price route responses (priceRoute objects) from /prices are valid for a short window (typically a few seconds to a minute) and should be cached client-side to reduce API call frequency.
+  - name: Partner Identifier
+    description: Including a partner query parameter in API calls helps ParaSwap attribute traffic correctly and may affect priority handling for known partners.
