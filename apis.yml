@@ -5,7 +5,7 @@ description: ParaSwap (now Velora) is a DEX aggregator that enables dApps and tr
   API for optimal route discovery and transaction building, and the Delta API for
   intent-based, gas-less swaps with MEV protection — plus an AugustusRFQ API for market
   makers to provide on-chain limit orders and peer-to-peer trading.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/paraswap/refs/heads/main/apis.yml
 created: '2026-06-14'
 modified: '2026-06-14'
@@ -26,7 +26,7 @@ apis:
     optimal routes (GET /prices), build transaction call data (POST /transactions),
     or combine both in a single call (GET /swap). Supports v5 and v6.2 of the Augustus
     smart contract.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
   baseURL: https://api.paraswap.io
   tags:
@@ -54,7 +54,7 @@ apis:
     Users sign a Delta Order (EIP-712 off-chain signature) rather than making transactions
     themselves, which provides MEV protection through the Portikus Intents network.
     Currently supports Ethereum and Base networks.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/velora-api/velora-delta-api
   baseURL: https://api.paraswap.io
   tags:
@@ -79,7 +79,7 @@ apis:
     providing token listings, pair data, price curves, and signed firm orders. Supports
     optional HMAC-SHA256 authentication and optional WebSocket streaming for real-time
     price updates.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/augustusrfq
   baseURL: https://api.paraswap.io
   tags:
@@ -102,7 +102,7 @@ apis:
   description: Retrieves the curated list of tokens supported across all ParaSwap-integrated
     networks. Returns token metadata including symbol, contract address, decimals,
     and icon image URL. Supports all 12 active networks via the network path parameter.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/get-tokens-list
   baseURL: https://api.paraswap.io
   tags:
@@ -125,7 +125,7 @@ apis:
     DEX swaps on Ethereum, Arbitrum, Avalanche, Base, BSC, Optimism, and Polygon.
     AugustusRFQ subgraphs provide limit order, P2P, and NFT trade history on Ethereum,
     Arbitrum, Avalanche, BSC, Optimism, and Polygon.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/subgraphs
   baseURL: https://api.thegraph.com/subgraphs/name/paraswap
   tags:
