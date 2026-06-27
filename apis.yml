@@ -146,13 +146,13 @@ apis:
 common:
 - type: Website
   url: https://www.velora.xyz/
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://developers.velora.xyz/
 - type: Documentation
   url: https://developers.velora.xyz/api/velora-api
-- type: GitHub Organization
+- type: GitHubOrganization
   url: https://github.com/VeloraDEX
-- type: SDK
+- type: SDKs
   url: https://github.com/VeloraDEX/sdk
 - type: npm Package
   url: https://www.npmjs.com/package/@paraswap/sdk
