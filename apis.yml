@@ -144,6 +144,8 @@ apis:
   overlays: []
   aid: paraswap:paraswap-subgraphs
 common:
+- type: DomainSecurity
+  url: security/paraswap-domain-security.yml
 - type: Website
   url: https://www.velora.xyz/
 - type: DeveloperPortal
@@ -160,6 +162,8 @@ common:
   url: https://developers.velora.xyz/security
 - type: Subgraphs
   url: https://developers.velora.xyz/subgraphs
+- url: https://velora.xyz/blog
+  type: Blog
 - type: App
   url: https://app.velora.xyz/
 - type: Plans
