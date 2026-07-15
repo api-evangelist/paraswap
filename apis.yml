@@ -144,6 +144,8 @@ apis:
   overlays: []
   aid: paraswap:paraswap-subgraphs
 common:
+- type: AgenticAccess
+  url: agentic-access/paraswap-agentic-access.yml
 - type: DomainSecurity
   url: security/paraswap-domain-security.yml
 - type: Website
