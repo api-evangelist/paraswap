@@ -1,0 +1,396 @@
+openapi: 3.0.3
+info:
+  title: ParaSwap Market API v5 prices transactions API
+  description: The ParaSwap Market API (now Velora Market API) provides real-time optimal swap routing across 170+ DEXes on 12 EVM-compatible chains. Retrieve price quotes with optimal routes, build transaction call data, or combine both in a single call. Supports the Augustus v5 smart contract.
+  contact:
+    email: contact@paraswap.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: '5.0'
+servers:
+- url: https://apiv5.paraswap.io
+tags:
+- name: transactions
+  description: Build parameters for a transaction
+paths:
+  /transactions/{network}:
+    post:
+      operationId: buildTransaction
+      tags:
+      - transactions
+      summary: Build Transaction to be sent to the blockchain.
+      description: Builds a transaction object ready to sign and send to the blockchain. Pass the priceRoute returned from /prices unmodified.
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionsRequestBody'
+      parameters:
+      - $ref: '#/components/parameters/Network'
+      - name: gasPrice
+        in: query
+        description: The set gas-price for the transaction in wei.
+        required: false
+        schema:
+          type: string
+        examples:
+          ? ''
+          : value: null
+          fast:
+            value: '50000000000'
+      - name: ignoreChecks
+        description: 'Allows the API to skip performing onchain checks such as balances, allowances, as well as transaction simulations.
+
+          <b>Note:</b> The response does not contain <b><u>gas</u></b> parameter when <i>ignoreChecks</i> is set to `true`.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: ignoreGasEstimate
+        description: Allows the API to skip gas checks <b>Note:</b> The response does not contain <b><u>gas</u></b> parameter when <i>ignoreGasEstimate</i> is set to `true`.
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: onlyParams
+        description: Allows the API to return the contract parameters only.
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionsBuildSuccessResponse'
+        '400':
+          $ref: '#/components/responses/TransactionsBuildErrorResponse'
+components:
+  schemas:
+    TransactionsError:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+    RouterParameters:
+      description: Returned when /transactions is called with onlyParams=true
+      type: array
+      items:
+        oneOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    OptimalRoute:
+      type: object
+      required:
+      - percent
+      - swaps
+      properties:
+        percent:
+          type: number
+          example: 100
+        swaps:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimalSwap'
+    Network:
+      type: number
+      enum:
+      - 1
+      - 3
+      - 56
+      - 137
+    PriceRoute:
+      description: Response body returned from /prices endpoint. Pass this object unmodified to /transactions.
+      type: object
+      required:
+      - blockNumber
+      - network
+      - srcToken
+      - srcDecimals
+      - srcAmount
+      - destToken
+      - destDecimals
+      - destAmount
+      - bestRoute
+      - gasCost
+      - gasCostUSD
+      - side
+      - tokenTransferProxy
+      - contractAddress
+      - contractMethod
+      - srcUSD
+      - destUSD
+      - partner
+      - partnerFee
+      - maxImpactReached
+      - hmac
+      properties:
+        blockNumber:
+          type: integer
+          minimum: 0
+          example: 13015909
+        network:
+          $ref: '#/components/schemas/Network'
+        srcToken:
+          description: Source Token Address
+          type: string
+          example: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+        srcDecimals:
+          $ref: '#/components/schemas/TokenDecimals'
+        srcAmount:
+          type: string
+          example: '1000000000000000000'
+        destToken:
+          description: Destination Token Address
+          type: string
+          example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+        destDecimals:
+          $ref: '#/components/schemas/TokenDecimals'
+        destAmount:
+          type: string
+          example: '1000000000000000000'
+        bestRoute:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimalRoute'
+        others:
+          description: Available if /prices was called with otherExchangePrices=true
+          type: array
+          items:
+            $ref: '#/components/schemas/OptionalRate'
+        gasCostUSD:
+          type: string
+          example: '11.947163'
+        gasCost:
+          type: string
+          example: '111435'
+        side:
+          $ref: '#/components/schemas/SwapSide'
+        tokenTransferProxy:
+          type: string
+          example: '0x3e7d31751347BAacf35945074a4a4A41581B2271'
+        contractAddress:
+          type: string
+          example: '0x485D2446711E141D2C8a94bC24BeaA5d5A110D74'
+        contractMethod:
+          type: string
+          example: swapOnUniswap
+        srcUSD:
+          type: string
+          example: '3230.3000000000'
+        destUSD:
+          type: string
+          example: '3218.9300566052'
+        partner:
+          type: string
+          example: paraswap.io
+        partnerFee:
+          type: integer
+          minimum: 0
+          example: 0
+        maxImpactReached:
+          type: boolean
+          example: false
+        hmac:
+          type: string
+          example: 319c5cf83098a07aeebb11bed6310db51311201f
+    TransactionsBuildResponse:
+      type: object
+      properties:
+        from:
+          type: string
+          example: '0xbe0eb53f46cd790cd13851d5eff43d12404d33e8'
+        to:
+          type: string
+          example: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57'
+        value:
+          type: string
+          example: '10000000000000000'
+        data:
+          type: string
+        gasPrice:
+          type: string
+          example: '42452400000'
+        chainId:
+          $ref: '#/components/schemas/Network'
+        gas:
+          description: Included only if neither ignoreChecks nor ignoreGasEstimate are true
+          type: string
+          example: '197142'
+    OptimalSwap:
+      type: object
+      required:
+      - srcToken
+      - srcDecimals
+      - destToken
+      - destDecimals
+      - swapExchanges
+      properties:
+        srcToken:
+          type: string
+        srcDecimals:
+          $ref: '#/components/schemas/TokenDecimals'
+        destToken:
+          type: string
+        destDecimals:
+          $ref: '#/components/schemas/TokenDecimals'
+        swapExchanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimalSwapExchange'
+    SwapSide:
+      type: string
+      enum:
+      - SELL
+      - BUY
+    TokenDecimals:
+      type: integer
+      minimum: 0
+    OptimalSwapExchange:
+      type: object
+      required:
+      - exchange
+      - srcAmount
+      - destAmount
+      - percent
+      properties:
+        exchange:
+          type: string
+          example: UniswapV2
+        srcAmount:
+          type: string
+          example: '1000000000000000000'
+        destAmount:
+          type: string
+          example: '1000000000000000000'
+        percent:
+          type: number
+          example: 100
+        data:
+          type: object
+    OptionalRate:
+      type: object
+      required:
+      - exchange
+      - srcAmount
+      - destAmount
+      properties:
+        exchange:
+          type: string
+          example: UniswapV2
+        srcAmount:
+          type: string
+          example: '1000000000000000000'
+        destAmount:
+          type: string
+          example: '3255989380'
+        unit:
+          type: string
+          example: '3255989380'
+        data:
+          type: object
+    TransactionsRequestPayload:
+      type: object
+      required:
+      - srcToken
+      - destToken
+      - userAddress
+      - priceRoute
+      properties:
+        srcToken:
+          description: Source Token Address. Only Token Symbol could be specified for tokens from /tokens.
+          type: string
+          example: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+        srcDecimals:
+          description: Source Token Decimals; can be omitted if Symbol is provided for srcToken.
+          type: integer
+          example: 18
+        destToken:
+          description: Destination Token Address. Only Token Symbol could be specified for tokens from /tokens.
+          type: string
+          example: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+        destDecimals:
+          description: Destination Token Decimals; can be omitted if Symbol is provided for destToken.
+          type: integer
+          example: 6
+        srcAmount:
+          description: Amount in the Denomination of srcToken as returned from the /prices endpoint. Required if side=SELL.
+          type: string
+          example: '10000000000000000'
+        destAmount:
+          description: Amount in the Denomination of destToken as returned from the /prices endpoint. Required if side=BUY.
+          type: string
+          example: '29504841'
+        slippage:
+          description: Slippage percentage in basis points. E.g. 250 = 2.5%. Can be passed instead of destAmount (SELL) or srcAmount (BUY).
+          type: integer
+          minimum: 0
+          maximum: 10000
+        userAddress:
+          description: Address of the signer / transaction sender.
+          type: string
+          example: '0xF7B2F3cD946052f8b397F801299b80F053515AF9'
+        txOrigin:
+          description: When msg.sender (userAddress) differs from the address calling the ParaSwap contract, txOrigin must be passed along with userAddress.
+          type: string
+        receiver:
+          description: Address of the token receiver.
+          type: string
+        partnerAddress:
+          description: Partner address. If provided, takes precedence over partner string.
+          type: string
+        partnerFeePercent:
+          description: Partner fee in basis points. Used together with partner if provided.
+          type: integer
+          minimum: 0
+          maximum: 10000
+        partner:
+          description: Partner identifier string.
+          type: string
+          example: metamask
+        permit:
+          description: Permit hash (hex-string) to skip token approval before swap, saving gas.
+          type: string
+        deadline:
+          description: Unix timestamp (seconds) until which the transaction is valid.
+          type: integer
+        priceRoute:
+          $ref: '#/components/schemas/PriceRoute'
+  responses:
+    TransactionsBuildSuccessResponse:
+      description: Ethereum transaction request object. `gas` is included only if neither of `ignoreChecks` and `ignoreGasEstimate` are true. When `onlyParams=true` RouterParameters is returned.
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/TransactionsBuildResponse'
+            - $ref: '#/components/schemas/RouterParameters'
+    TransactionsBuildErrorResponse:
+      description: Transaction Building Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionsError'
+  parameters:
+    Network:
+      name: network
+      in: path
+      description: ID of the network. (Mainnet - 1, Ropsten - 3, Polygon - 56, BSC - 137).
+      required: true
+      schema:
+        allOf:
+        - $ref: '#/components/schemas/Network'
+        - default: 1
+  requestBodies:
+    TransactionsRequestBody:
+      description: Transaction request payload. The priceRoute object should be parsed directly without any change.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionsRequestPayload'
+externalDocs:
+  description: Velora / ParaSwap Developer Documentation
+  url: https://developers.velora.xyz/api/velora-api/velora-market-api
