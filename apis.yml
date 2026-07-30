@@ -5,7 +5,19 @@ description: ParaSwap (now Velora) is a DEX aggregator that enables dApps and tr
   API for optimal route discovery and transaction building, and the Delta API for
   intent-based, gas-less swaps with MEV protection — plus an AugustusRFQ API for market
   makers to provide on-chain limit orders and peer-to-peer trading.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: approval
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium · Requires approval
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paraswap.png
 url: https://raw.githubusercontent.com/api-evangelist/paraswap/refs/heads/main/apis.yml
 created: '2026-06-14'
 modified: '2026-06-14'
@@ -20,40 +32,12 @@ tags:
 - Liquidity
 - Smart Contracts
 apis:
-- name: ParaSwap Market API
-  description: The Velora Market API provides real-time optimal swap routing across
-    170+ DEXes on 12 EVM-compatible chains. Developers can retrieve price quotes with
-    optimal routes (GET /prices), build transaction call data (POST /transactions),
-    or combine both in a single call (GET /swap). Supports v5 and v6.2 of the Augustus
-    smart contract.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
-  baseURL: https://api.paraswap.io
-  tags:
-  - DEX Aggregator
-  - Swap Routing
-  - Price Quotes
-  - Token Swaps
-  - EVM
-  properties:
-  - type: Documentation
-    url: https://developers.velora.xyz/api/velora-api/velora-market-api
-  - type: OpenAPI
-    url: https://gist.github.com/SpotLabsNET/ae3be6da4dbc8376e17f526f04ada75d
-  - url: graphql/paraswap-graphql.md
-    type: GraphQL
-  contact:
-  - FN: ParaSwap / Velora
-    url: https://www.velora.xyz/
-    email: ''
-  overlays: []
-  aid: paraswap:paraswap-market-api
 - name: ParaSwap Delta API
-  description: The Velora Delta API is an intent-based protocol that enables gas-less
-    token swaps where multiple agents compete to execute trades on behalf of users.
-    Users sign a Delta Order (EIP-712 off-chain signature) rather than making transactions
-    themselves, which provides MEV protection through the Portikus Intents network.
-    Currently supports Ethereum and Base networks.
+  description: >-
+    The Velora Delta API is an intent-based protocol that enables gas-less token swaps where multiple
+    agents compete to execute trades on behalf of users. Users sign a Delta Order (EIP-712 off-chain signature)
+    rather than making transactions themselves, which provides MEV protection through the Portikus Intents
+    network. Currently supports Ethereum and Base networks.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/velora-api/velora-delta-api
   baseURL: https://api.paraswap.io
@@ -73,12 +57,12 @@ apis:
   overlays: []
   aid: paraswap:paraswap-delta-api
 - name: ParaSwap AugustusRFQ API
-  description: The AugustusRFQ API enables market makers to integrate with ParaSwap's
-    on-chain limit order and Request-for-Quote system, supporting fungible token (ERC-20)
-    and NFT trading. Market makers implement a standardized HTTP specification for
-    providing token listings, pair data, price curves, and signed firm orders. Supports
-    optional HMAC-SHA256 authentication and optional WebSocket streaming for real-time
-    price updates.
+  description: >-
+    The AugustusRFQ API enables market makers to integrate with ParaSwap's on-chain limit order and Request-for-Quote
+    system, supporting fungible token (ERC-20) and NFT trading. Market makers implement a standardized
+    HTTP specification for providing token listings, pair data, price curves, and signed firm orders.
+    Supports optional HMAC-SHA256 authentication and optional WebSocket streaming for real-time price
+    updates.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/augustusrfq
   baseURL: https://api.paraswap.io
@@ -99,9 +83,10 @@ apis:
   overlays: []
   aid: paraswap:paraswap-augustusrfq-api
 - name: ParaSwap Tokens API
-  description: Retrieves the curated list of tokens supported across all ParaSwap-integrated
-    networks. Returns token metadata including symbol, contract address, decimals,
-    and icon image URL. Supports all 12 active networks via the network path parameter.
+  description: >-
+    Retrieves the curated list of tokens supported across all ParaSwap-integrated networks. Returns token
+    metadata including symbol, contract address, decimals, and icon image URL. Supports all 12 active
+    networks via the network path parameter.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/api/get-tokens-list
   baseURL: https://api.paraswap.io
@@ -120,10 +105,10 @@ apis:
   overlays: []
   aid: paraswap:paraswap-tokens-api
 - name: ParaSwap Subgraphs (GraphQL)
-  description: ParaSwap exposes TheGraph subgraphs for historical swap data and limit
-    order/RFQ activity across multiple networks. Augustus v5 subgraphs cover standard
-    DEX swaps on Ethereum, Arbitrum, Avalanche, Base, BSC, Optimism, and Polygon.
-    AugustusRFQ subgraphs provide limit order, P2P, and NFT trade history on Ethereum,
+  description: >-
+    ParaSwap exposes TheGraph subgraphs for historical swap data and limit order/RFQ activity across multiple
+    networks. Augustus v5 subgraphs cover standard DEX swaps on Ethereum, Arbitrum, Avalanche, Base, BSC,
+    Optimism, and Polygon. AugustusRFQ subgraphs provide limit order, P2P, and NFT trade history on Ethereum,
     Arbitrum, Avalanche, BSC, Optimism, and Polygon.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developers.velora.xyz/subgraphs
@@ -143,6 +128,48 @@ apis:
     email: ''
   overlays: []
   aid: paraswap:paraswap-subgraphs
+- aid: paraswap:paraswap-prices-api
+  name: ParaSwap prices API
+  description: Get swap path and pricing.
+  humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
+  baseURL: https://api.paraswap.io
+  tags:
+  - prices
+  properties:
+  - type: OpenAPI
+    url: openapi/paraswap-prices-api-openapi.yml
+  - type: Documentation
+    url: https://developers.velora.xyz/api/velora-api/velora-market-api
+  - type: GraphQL
+    url: graphql/paraswap-graphql.md
+- aid: paraswap:paraswap-tokens-api
+  name: ParaSwap tokens API
+  description: Return tokens list from Paraswap
+  humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
+  baseURL: https://api.paraswap.io
+  tags:
+  - tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/paraswap-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://developers.velora.xyz/api/velora-api/velora-market-api
+  - type: GraphQL
+    url: graphql/paraswap-graphql.md
+- aid: paraswap:paraswap-transactions-api
+  name: ParaSwap transactions API
+  description: Build parameters for a transaction
+  humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
+  baseURL: https://api.paraswap.io
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/paraswap-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developers.velora.xyz/api/velora-api/velora-market-api
+  - type: GraphQL
+    url: graphql/paraswap-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/paraswap-agentic-access.yml
