@@ -1,0 +1,18 @@
+{
+  "provider": "paraswap",
+  "sources": [
+    "paraswap-prices-api-openapi.yml",
+    "paraswap-tokens-api-openapi.yml",
+    "paraswap-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "paraswap-prices-api-openapi.yml",
+    "paraswap-tokens-api-openapi.yml",
+    "paraswap-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
