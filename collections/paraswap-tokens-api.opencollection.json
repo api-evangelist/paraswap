@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaSwap Market API v5 prices tokens API",
+    "version": "5.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tokens list (Mainnet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv5.paraswap.io/tokens"
+          },
+          "docs": "alias for /tokens/1 — returns curated token list for Ethereum Mainnet"
+        },
+        {
+          "info": {
+            "name": "Get tokens list by network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv5.paraswap.io/tokens/:network",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "ID of the network. (Mainnet - 1, Ropsten - 3, Polygon - 56, BSC - 137)."
+              }
+            ]
+          },
+          "docs": "Get tokens list by network"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

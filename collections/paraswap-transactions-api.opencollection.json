@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaSwap Market API v5 prices transactions API",
+    "version": "5.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Build Transaction to be sent to the blockchain.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apiv5.paraswap.io/transactions/:network",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "ID of the network. (Mainnet - 1, Ropsten - 3, Polygon - 56, BSC - 137)."
+              },
+              {
+                "name": "gasPrice",
+                "value": "",
+                "type": "query",
+                "description": "The set gas-price for the transaction in wei."
+              },
+              {
+                "name": "ignoreChecks",
+                "value": "",
+                "type": "query",
+                "description": "Allows the API to skip performing onchain checks such as balances, allowances, as well as transaction simulations.\n<b>Note:</b> The response does not contain <b><u>gas</u></b> parameter when <i>ignoreChecks</i> is set to `true`.\n"
+              },
+              {
+                "name": "ignoreGasEstimate",
+                "value": "",
+                "type": "query",
+                "description": "Allows the API to skip gas checks <b>Note:</b> The response does not contain <b><u>gas</u></b> parameter when <i>ignoreGasEstimate</i> is set to `true`."
+              },
+              {
+                "name": "onlyParams",
+                "value": "",
+                "type": "query",
+                "description": "Allows the API to return the contract parameters only."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Builds a transaction object ready to sign and send to the blockchain. Pass the priceRoute returned from /prices unmodified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

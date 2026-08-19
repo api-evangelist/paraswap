@@ -1,0 +1,350 @@
+{
+  "item": [
+    {
+      "id": "9d55cfbb-4ba7-4ca9-b9ae-e248a18edded",
+      "name": "prices",
+      "description": {
+        "content": "Get swap path and pricing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18124022-9868-4eb3-91c6-5529f90c853f",
+          "name": "Request prices.",
+          "request": {
+            "name": "Request prices.",
+            "description": {
+              "content": "Returns optimal swap route and pricing across all integrated DEXes for a given token pair and amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "srcToken",
+                  "value": "<string>",
+                  "description": "(Required) Source Token Address or Token Symbol (for tokens from /tokens)."
+                },
+                {
+                  "disabled": false,
+                  "key": "srcDecimals",
+                  "value": "<integer>",
+                  "description": "Source Token Decimals; can be omitted if Symbol is provided for `srcToken`."
+                },
+                {
+                  "disabled": false,
+                  "key": "destToken",
+                  "value": "<string>",
+                  "description": "(Required) Destination Token Address or Token Symbol (for tokens from /tokens)."
+                },
+                {
+                  "disabled": false,
+                  "key": "destDecimals",
+                  "value": "<integer>",
+                  "description": "Destination Token Decimals; can be omitted if Symbol is provided for `destToken`."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<string>",
+                  "description": "(Required) Amount in the Denomination of Source Token"
+                },
+                {
+                  "disabled": false,
+                  "key": "side",
+                  "value": "<string>",
+                  "description": "(Required) Side of the swap."
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<number>",
+                  "description": "ID of the blockchain network."
+                },
+                {
+                  "disabled": false,
+                  "key": "otherExchangePrices",
+                  "value": "<boolean>",
+                  "description": "_If provided_, **others** object is filled in the response with price quotes from other exchanges (if available for comparison)."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeDEXS",
+                  "value": "<string>,<string>",
+                  "description": "Comma Separated List of DEXs to include without spaces."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeDEXS",
+                  "value": "<string>,<string>",
+                  "description": "Comma Separated List of DEXs to exclude without spaces."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeContractMethods",
+                  "value": "<string>,<string>",
+                  "description": "Comma Separated List of Contract Methods to include without spaces."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeContractMethods",
+                  "value": "<string>,<string>",
+                  "description": "Comma Separated List of Contract Methods to exclude without spaces."
+                },
+                {
+                  "disabled": false,
+                  "key": "userAddress",
+                  "value": "<string>",
+                  "description": "User Wallet Address."
+                },
+                {
+                  "disabled": false,
+                  "key": "route",
+                  "value": "<string>",
+                  "description": "Dash (-) separated list of tokens (addresses or symbols from /tokens) to comprise the price route. Max 4 tokens"
+                },
+                {
+                  "disabled": false,
+                  "key": "partner",
+                  "value": "<string>",
+                  "description": "partner string"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86bbefe3-9109-496f-bf05-c4b923dbeda8",
+              "name": "Successful prices response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "srcToken",
+                      "value": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+                    },
+                    {
+                      "key": "srcDecimals",
+                      "value": "18"
+                    },
+                    {
+                      "key": "destToken",
+                      "value": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+                    },
+                    {
+                      "key": "destDecimals",
+                      "value": "6"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "1000000000000000000"
+                    },
+                    {
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "network",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "otherExchangePrices",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeDEXS",
+                      "value": "SushiSwap,SushiSwap"
+                    },
+                    {
+                      "key": "excludeDEXS",
+                      "value": "SushiSwap,SushiSwap"
+                    },
+                    {
+                      "key": "includeContractMethods",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "excludeContractMethods",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"priceRoute\": {\n    \"blockNumber\": 13015909,\n    \"network\": \"<number>\",\n    \"srcToken\": \"0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE\",\n    \"srcDecimals\": 6,\n    \"srcAmount\": \"1000000000000000000\",\n    \"destToken\": \"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48\",\n    \"destDecimals\": 6,\n    \"destAmount\": \"1000000000000000000\",\n    \"bestRoute\": [\n      {\n        \"percent\": 100,\n        \"swaps\": [\n          {\n            \"srcToken\": \"string\",\n            \"srcDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"destToken\": \"string\",\n            \"destDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swapExchanges\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"srcToken\": \"string\",\n            \"srcDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"destToken\": \"string\",\n            \"destDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swapExchanges\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"percent\": 100,\n        \"swaps\": [\n          {\n            \"srcToken\": \"string\",\n            \"srcDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"destToken\": \"string\",\n            \"destDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swapExchanges\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"srcToken\": \"string\",\n            \"srcDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"destToken\": \"string\",\n            \"destDecimals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swapExchanges\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ],\n    \"gasCost\": \"111435\",\n    \"gasCostUSD\": \"11.947163\",\n    \"side\": \"<string>\",\n    \"tokenTransferProxy\": \"0x3e7d31751347BAacf35945074a4a4A41581B2271\",\n    \"contractAddress\": \"0x485D2446711E141D2C8a94bC24BeaA5d5A110D74\",\n    \"contractMethod\": \"swapOnUniswap\",\n    \"srcUSD\": \"3230.3000000000\",\n    \"destUSD\": \"3218.9300566052\",\n    \"partner\": \"paraswap.io\",\n    \"partnerFee\": 0,\n    \"maxImpactReached\": false,\n    \"hmac\": \"319c5cf83098a07aeebb11bed6310db51311201f\",\n    \"others\": [\n      {\n        \"exchange\": \"UniswapV2\",\n        \"srcAmount\": \"1000000000000000000\",\n        \"destAmount\": \"3255989380\",\n        \"unit\": \"3255989380\",\n        \"data\": {}\n      },\n      {\n        \"exchange\": \"UniswapV2\",\n        \"srcAmount\": \"1000000000000000000\",\n        \"destAmount\": \"3255989380\",\n        \"unit\": \"3255989380\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f1621f0-36bc-4ca1-aa1f-4257f65017f8",
+              "name": "Price Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "srcToken",
+                      "value": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+                    },
+                    {
+                      "key": "srcDecimals",
+                      "value": "18"
+                    },
+                    {
+                      "key": "destToken",
+                      "value": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+                    },
+                    {
+                      "key": "destDecimals",
+                      "value": "6"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "1000000000000000000"
+                    },
+                    {
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "network",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "otherExchangePrices",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeDEXS",
+                      "value": "SushiSwap,SushiSwap"
+                    },
+                    {
+                      "key": "excludeDEXS",
+                      "value": "SushiSwap,SushiSwap"
+                    },
+                    {
+                      "key": "includeContractMethods",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "excludeContractMethods",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv5.paraswap.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c3b3c886-d5aa-448f-9e5f-39281f5e6b08",
+    "name": "ParaSwap Market API v5 prices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ParaSwap Market API (now Velora Market API) provides real-time optimal swap routing across 170+ DEXes on 12 EVM-compatible chains. Retrieve price quotes with optimal routes, build transaction call data, or combine both in a single call. Supports the Augustus v5 smart contract.\n\nContact Support:\n Email: contact@paraswap.io",
+      "type": "text/plain"
+    }
+  }
+}

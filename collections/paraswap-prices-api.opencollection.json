@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaSwap Market API v5 prices API",
+    "version": "5.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request prices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apiv5.paraswap.io/prices",
+            "params": [
+              {
+                "name": "srcToken",
+                "value": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+                "type": "query",
+                "description": "Source Token Address or Token Symbol (for tokens from /tokens)."
+              },
+              {
+                "name": "srcDecimals",
+                "value": "18",
+                "type": "query",
+                "description": "Source Token Decimals; can be omitted if Symbol is provided for `srcToken`."
+              },
+              {
+                "name": "destToken",
+                "value": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "type": "query",
+                "description": "Destination Token Address or Token Symbol (for tokens from /tokens)."
+              },
+              {
+                "name": "destDecimals",
+                "value": "6",
+                "type": "query",
+                "description": "Destination Token Decimals; can be omitted if Symbol is provided for `destToken`."
+              },
+              {
+                "name": "amount",
+                "value": "1000000000000000000",
+                "type": "query",
+                "description": "Amount in the Denomination of Source Token"
+              },
+              {
+                "name": "side",
+                "value": "",
+                "type": "query",
+                "description": "Side of the swap."
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "ID of the blockchain network."
+              },
+              {
+                "name": "otherExchangePrices",
+                "value": "",
+                "type": "query",
+                "description": "_If provided_, **others** object is filled in the response with price quotes from other exchanges (if available for comparison)."
+              },
+              {
+                "name": "includeDEXS",
+                "value": "",
+                "type": "query",
+                "description": "Comma Separated List of DEXs to include without spaces."
+              },
+              {
+                "name": "excludeDEXS",
+                "value": "",
+                "type": "query",
+                "description": "Comma Separated List of DEXs to exclude without spaces."
+              },
+              {
+                "name": "includeContractMethods",
+                "value": "",
+                "type": "query",
+                "description": "Comma Separated List of Contract Methods to include without spaces."
+              },
+              {
+                "name": "excludeContractMethods",
+                "value": "",
+                "type": "query",
+                "description": "Comma Separated List of Contract Methods to exclude without spaces."
+              },
+              {
+                "name": "userAddress",
+                "value": "",
+                "type": "query",
+                "description": "User Wallet Address."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Dash (-) separated list of tokens (addresses or symbols from /tokens) to comprise the price route. Max 4 tokens"
+              },
+              {
+                "name": "partner",
+                "value": "",
+                "type": "query",
+                "description": "partner string"
+              }
+            ]
+          },
+          "docs": "Returns optimal swap route and pricing across all integrated DEXes for a given token pair and amount."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

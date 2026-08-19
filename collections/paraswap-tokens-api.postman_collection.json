@@ -1,0 +1,187 @@
+{
+  "item": [
+    {
+      "id": "b09c1d93-c4fc-41a1-adab-bd2953a36f9b",
+      "name": "tokens",
+      "description": {
+        "content": "Return tokens list from Paraswap",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab391b5d-48b4-4132-84f9-9a67fe6893e9",
+          "name": "Get tokens list (Mainnet)",
+          "request": {
+            "name": "Get tokens list (Mainnet)",
+            "description": {
+              "content": "alias for /tokens/1 — returns curated token list for Ethereum Mainnet",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df191bec-cad3-4af7-952f-1e0408a954ba",
+              "name": "List of available tokens",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tokens\": [\n    {\n      \"symbol\": \"ETH\",\n      \"address\": \"0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE\",\n      \"decimals\": 18,\n      \"img\": \"https://img.paraswap.network/ETH.png\",\n      \"network\": 1\n    },\n    {\n      \"symbol\": \"USDT\",\n      \"address\": \"0xdac17f958d2ee523a2206206994597c13d831ec7\",\n      \"decimals\": 6,\n      \"img\": \"https://img.paraswap.network/USDT.png\",\n      \"network\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d07c3f9-1ffc-450d-a602-208e495727af",
+          "name": "Get tokens list by network",
+          "request": {
+            "name": "Get tokens list by network",
+            "description": {},
+            "url": {
+              "path": [
+                "tokens",
+                ":network"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<number>",
+                  "key": "network",
+                  "description": "(Required) ID of the network. (Mainnet - 1, Ropsten - 3, Polygon - 56, BSC - 137)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dd0eef6-3cad-42c3-97fb-20577bc3bfa2",
+              "name": "List of available tokens",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    ":network"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<number>",
+                      "key": "network",
+                      "description": "(Required) ID of the network. (Mainnet - 1, Ropsten - 3, Polygon - 56, BSC - 137)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tokens\": [\n    {\n      \"symbol\": \"ETH\",\n      \"address\": \"0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE\",\n      \"decimals\": 18,\n      \"img\": \"https://img.paraswap.network/ETH.png\",\n      \"network\": 1\n    },\n    {\n      \"symbol\": \"USDT\",\n      \"address\": \"0xdac17f958d2ee523a2206206994597c13d831ec7\",\n      \"decimals\": 6,\n      \"img\": \"https://img.paraswap.network/USDT.png\",\n      \"network\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apiv5.paraswap.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aaff9c27-1f20-451d-9c10-dd41b8466cff",
+    "name": "ParaSwap Market API v5 prices tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ParaSwap Market API (now Velora Market API) provides real-time optimal swap routing across 170+ DEXes on 12 EVM-compatible chains. Retrieve price quotes with optimal routes, build transaction call data, or combine both in a single call. Supports the Augustus v5 smart contract.\n\nContact Support:\n Email: contact@paraswap.io",
+      "type": "text/plain"
+    }
+  }
+}
