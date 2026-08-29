@@ -5,6 +5,18 @@ description: ParaSwap (now Velora) is a DEX aggregator that enables dApps and tr
   API for optimal route discovery and transaction building, and the Delta API for
   intent-based, gas-less swaps with MEV protection — plus an AugustusRFQ API for market
   makers to provide on-chain limit orders and peer-to-peer trading.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: approval
