@@ -83,7 +83,7 @@ apis:
   - Limit Orders
   - RFQ
   - NFT
-  - On-chain
+  - Onchain
   - EIP-712
   tags_raw:
   - Market Maker
@@ -137,7 +137,7 @@ apis:
   - Subgraph
   - Historical Data
   - Analytics
-  - TheGraph
+  - The Graph
   tags_raw:
   - GraphQL
   - Subgraph
@@ -159,7 +159,7 @@ apis:
   humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
   baseURL: https://api.paraswap.io
   tags:
-  - prices
+  - Prices
   tags_raw:
   - prices
   properties:
