@@ -1,0 +1,55 @@
+generated: '2026-09-11'
+method: probed
+source: https://ai.velora.xyz/mcp
+status: published
+server:
+  name: paraswap
+  transport: http
+  url: https://ai.velora.xyz/mcp
+deployment:
+  mode: remote
+  endpoint: https://ai.velora.xyz/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: docs-check 2026-09-11 (endpoint found in the provider's own documentation, then probed)
+tools_count: 18
+tools:
+- name: velora_search_docs
+  description: ''
+- name: velora_get_docs_page
+  description: ''
+- name: velora_get_supported_chains
+  description: ''
+- name: velora_get_tokens
+  description: ''
+- name: velora_get_quote
+  description: ''
+- name: velora_build_transaction
+  description: ''
+- name: velora_build_delta_order
+  description: ''
+- name: velora_build_twap_delta_order
+  description: ''
+- name: velora_submit_delta_order
+  description: ''
+- name: velora_submit_twap_order
+  description: ''
+- name: velora_get_delta_orders
+  description: ''
+- name: velora_get_delta_order
+  description: ''
+- name: velora_build_cancel_delta_order
+  description: ''
+- name: velora_submit_cancel_delta_order
+  description: ''
+- name: velora_get_bridge_routes
+  description: ''
+- name: velora_decide_execution_route
+  description: ''
+- name: velora_explain_quote
+  description: ''
+- name: velora_validate_agent_plan
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
+authorship: provider
