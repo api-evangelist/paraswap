@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ParaSwap Market API v5 prices API
+  title: ParaSwap Market API v5 Prices API
   description: The ParaSwap Market API (now Velora Market API) provides real-time optimal swap routing across 170+ DEXes on 12 EVM-compatible chains. Retrieve price quotes with optimal routes, build transaction call data, or combine both in a single call. Supports the Augustus v5 smart contract.
   contact:
     email: contact@paraswap.io
@@ -11,15 +11,15 @@ info:
 servers:
 - url: https://apiv5.paraswap.io
 tags:
-- name: prices
+- name: Prices
   description: Get swap path and pricing.
 paths:
   /prices:
     get:
       operationId: getPrices
       tags:
-      - prices
-      summary: Request prices.
+      - Prices
+      summary: Request prices
       description: Returns optimal swap route and pricing across all integrated DEXes for a given token pair and amount.
       parameters:
       - name: srcToken
@@ -144,6 +144,13 @@ paths:
           $ref: '#/components/responses/PricesErrorResponse'
 components:
   schemas:
+    PriceError:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
     DEXs:
       type: string
       description: Supported DEXs. The list may change
@@ -221,6 +228,27 @@ components:
       - Biswap
       - BProtocol
       example: SushiSwap
+    OptionalRate:
+      type: object
+      required:
+      - exchange
+      - srcAmount
+      - destAmount
+      properties:
+        exchange:
+          type: string
+          example: UniswapV2
+        srcAmount:
+          type: string
+          example: '1000000000000000000'
+        destAmount:
+          type: string
+          example: '3255989380'
+        unit:
+          type: string
+          example: '3255989380'
+        data:
+          type: object
     OptimalRoute:
       type: object
       required:
@@ -234,6 +262,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OptimalSwap'
+    OptimalSwap:
+      type: object
+      required:
+      - srcToken
+      - srcDecimals
+      - destToken
+      - destDecimals
+      - swapExchanges
+      properties:
+        srcToken:
+          type: string
+        srcDecimals:
+          $ref: '#/components/schemas/TokenDecimals'
+        destToken:
+          type: string
+        destDecimals:
+          $ref: '#/components/schemas/TokenDecimals'
+        swapExchanges:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimalSwapExchange'
+    TokenDecimals:
+      type: integer
+      minimum: 0
+    SwapSide:
+      type: string
+      enum:
+      - SELL
+      - BUY
     Network:
       type: number
       enum:
@@ -336,59 +393,6 @@ components:
         hmac:
           type: string
           example: 319c5cf83098a07aeebb11bed6310db51311201f
-    PriceRouteWithError:
-      type: object
-      required:
-      - error
-      - value
-      - priceRoute
-      properties:
-        error:
-          type: string
-          enum:
-          - ESTIMATED_LOSS_GREATER_THAN_MAX_IMPACT
-        value:
-          description: price impact percentage
-          type: string
-          pattern: ^\d+(\.\d+)?%$
-          example: 99%
-        priceRoute:
-          $ref: '#/components/schemas/PriceRoute'
-    SwapSide:
-      type: string
-      enum:
-      - SELL
-      - BUY
-    ContractMethod:
-      type: string
-      enum:
-      - swapOnUniswap
-      - buyOnUniswap
-      - swapOnUniswapFork
-      - buyOnUniswapFork
-      - swapOnUniswapV2Fork
-      - buyOnUniswapV2Fork
-      - simpleBuy
-      - simpleSwap
-      - multiSwap
-      - megaSwap
-      - protectedMultiSwap
-      - protectedMegaSwap
-      - protectedSimpleSwap
-      - protectedSimpleBuy
-      - swapOnZeroXv2
-      - swapOnZeroXv4
-      - buy
-    TokenDecimals:
-      type: integer
-      minimum: 0
-    PriceError:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
     OptimalSwapExchange:
       type: object
       required:
@@ -411,49 +415,53 @@ components:
           example: 100
         data:
           type: object
-    OptionalRate:
+    PriceRouteWithError:
       type: object
       required:
-      - exchange
-      - srcAmount
-      - destAmount
+      - error
+      - value
+      - priceRoute
       properties:
-        exchange:
+        error:
           type: string
-          example: UniswapV2
-        srcAmount:
+          enum:
+          - ESTIMATED_LOSS_GREATER_THAN_MAX_IMPACT
+        value:
+          description: price impact percentage
           type: string
-          example: '1000000000000000000'
-        destAmount:
-          type: string
-          example: '3255989380'
-        unit:
-          type: string
-          example: '3255989380'
-        data:
-          type: object
-    OptimalSwap:
-      type: object
-      required:
-      - srcToken
-      - srcDecimals
-      - destToken
-      - destDecimals
-      - swapExchanges
-      properties:
-        srcToken:
-          type: string
-        srcDecimals:
-          $ref: '#/components/schemas/TokenDecimals'
-        destToken:
-          type: string
-        destDecimals:
-          $ref: '#/components/schemas/TokenDecimals'
-        swapExchanges:
-          type: array
-          items:
-            $ref: '#/components/schemas/OptimalSwapExchange'
+          pattern: ^\d+(\.\d+)?%$
+          example: 99%
+        priceRoute:
+          $ref: '#/components/schemas/PriceRoute'
+    ContractMethod:
+      type: string
+      enum:
+      - swapOnUniswap
+      - buyOnUniswap
+      - swapOnUniswapFork
+      - buyOnUniswapFork
+      - swapOnUniswapV2Fork
+      - buyOnUniswapV2Fork
+      - simpleBuy
+      - simpleSwap
+      - multiSwap
+      - megaSwap
+      - protectedMultiSwap
+      - protectedMegaSwap
+      - protectedSimpleSwap
+      - protectedSimpleBuy
+      - swapOnZeroXv2
+      - swapOnZeroXv4
+      - buy
   responses:
+    PricesErrorResponse:
+      description: Price Error
+      content:
+        application/json:
+          schema:
+            oneOf:
+            - $ref: '#/components/schemas/PriceError'
+            - $ref: '#/components/schemas/PriceRouteWithError'
     PricesSuccessResponse:
       description: Successful prices response
       content:
@@ -463,14 +471,6 @@ components:
             properties:
               priceRoute:
                 $ref: '#/components/schemas/PriceRoute'
-    PricesErrorResponse:
-      description: Price Error
-      content:
-        application/json:
-          schema:
-            oneOf:
-            - $ref: '#/components/schemas/PriceError'
-            - $ref: '#/components/schemas/PriceRouteWithError'
 externalDocs:
   description: Velora / ParaSwap Developer Documentation
   url: https://developers.velora.xyz/api/velora-api/velora-market-api
