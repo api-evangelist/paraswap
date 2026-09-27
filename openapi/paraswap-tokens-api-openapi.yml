@@ -37,13 +37,6 @@ paths:
           $ref: '#/components/responses/TokensResponse'
 components:
   schemas:
-    TokensList:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/Token'
     Network:
       type: number
       enum:
@@ -51,9 +44,13 @@ components:
       - 3
       - 56
       - 137
-    TokenDecimals:
-      type: integer
-      minimum: 0
+    TokensList:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Token'
     Token:
       type: object
       required:
@@ -98,6 +95,9 @@ components:
           - idleToken
           - Chai
           - bDAI
+    TokenDecimals:
+      type: integer
+      minimum: 0
   parameters:
     Network:
       name: network

@@ -101,28 +101,6 @@ apis:
     email: ''
   overlays: []
   aid: paraswap:paraswap-augustusrfq-api
-- name: ParaSwap Tokens API
-  description: >-
-    Retrieves the curated list of tokens supported across all ParaSwap-integrated networks. Returns token
-    metadata including symbol, contract address, decimals, and icon image URL. Supports all 12 active
-    networks via the network path parameter.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.velora.xyz/api/get-tokens-list
-  baseURL: https://api.paraswap.io
-  tags:
-  - Tokens
-  - Token List
-  - Metadata
-  - ERC-20
-  properties:
-  - type: Documentation
-    url: https://developers.velora.xyz/api/get-tokens-list
-  contact:
-  - FN: ParaSwap / Velora
-    url: https://www.velora.xyz/
-    email: ''
-  overlays: []
-  aid: paraswap:paraswap-tokens-api
 - name: ParaSwap Subgraphs (GraphQL)
   description: >-
     ParaSwap exposes TheGraph subgraphs for historical swap data and limit order/RFQ activity across multiple
@@ -154,7 +132,7 @@ apis:
   overlays: []
   aid: paraswap:paraswap-subgraphs
 - aid: paraswap:paraswap-prices-api
-  name: ParaSwap prices API
+  name: ParaSwap Prices API
   description: Get swap path and pricing.
   humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
   baseURL: https://api.paraswap.io
@@ -170,14 +148,22 @@ apis:
   - type: GraphQL
     url: graphql/paraswap-graphql.md
 - aid: paraswap:paraswap-tokens-api
-  name: ParaSwap tokens API
-  description: Return tokens list from Paraswap
-  humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
+  name: ParaSwap Tokens API
+  description: Retrieves the curated list of tokens supported across all ParaSwap-integrated networks. Returns
+    token metadata including symbol, contract address, decimals, and icon image URL. Supports all 12 active
+    networks via the network path parameter.
+  humanURL: https://developers.velora.xyz/api/get-tokens-list
   baseURL: https://api.paraswap.io
   tags:
   - Tokens
+  - Token List
+  - Metadata
+  - ERC-20
   tags_raw:
   - tokens
+  - Token List
+  - Metadata
+  - ERC-20
   properties:
   - type: OpenAPI
     url: openapi/paraswap-tokens-api-openapi.yml
@@ -185,8 +171,16 @@ apis:
     url: https://developers.velora.xyz/api/velora-api/velora-market-api
   - type: GraphQL
     url: graphql/paraswap-graphql.md
+  - type: Documentation
+    url: https://developers.velora.xyz/api/get-tokens-list
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  contact:
+  - FN: ParaSwap / Velora
+    url: https://www.velora.xyz/
+    email: ''
+  overlays: []
 - aid: paraswap:paraswap-transactions-api
-  name: ParaSwap transactions API
+  name: ParaSwap Transactions API
   description: Build parameters for a transaction
   humanURL: https://developers.velora.xyz/api/velora-api/velora-market-api
   baseURL: https://api.paraswap.io
