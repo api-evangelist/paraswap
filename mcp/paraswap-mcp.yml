@@ -16,40 +16,75 @@ deployment:
 tools_count: 18
 tools:
 - name: velora_search_docs
-  description: ''
+  description: Search Velora's canonical documentation. Use this BEFORE guessing Velora behavior — covers
+    integration guidance, endpoint behavior, Delta vs Market execution modes, and agent workflows.
 - name: velora_get_docs_page
-  description: ''
+  description: Fetch a single Velora documentation page as markdown by its docs slug (e.g. "delta/overview").
+    Slugs are validated and must resolve inside the docs site — absolute URLs and path traversal are rejected.
 - name: velora_get_supported_chains
-  description: ''
+  description: List the EVM chains Velora supports (chainId + name). This is a server-known list, not
+    a live API response, and may lag actual support — confirm a specific chain with velora_get_tokens.
+    Do not assume every EVM chain is supported.
 - name: velora_get_tokens
-  description: ''
+  description: List the tokens Velora can route on a given chain (symbol, address, decimals, plus name
+    and the upstream sources Velora reports for each address). Pass chainId (never `network`). This is
+    the same token data velora_get_quote resolves symbols
 - name: velora_get_quote
-  description: ''
+  description: Get a Velora quote. Pass chainId (never `network`), amount, and side. By DEFAULT amount
+    is a human-readable token amount — e.g. for 'quote 1 ETH to USDC' pass amount='1' (or amount='0.5'
+    for half a token); the server converts it to raw base
 - name: velora_build_transaction
-  description: ''
+  description: Build an UNSIGNED Market swap transaction from a quote's priceRoute (passed verbatim).
+    Market only — Delta orders are built and signed via the documented Delta path, not this tool. Returns
+    the unsigned transaction payload; it is never signe
 - name: velora_build_delta_order
-  description: ''
+  description: Build a Velora Delta order (server-side) from a Delta quote's route, returning UNSIGNED
+    EIP-712 typed data ({toSign, orderHash}). Get a Delta quote first (velora_get_quote mode=DELTA) and
+    pass result.raw.delta.route (or one of its alternati
 - name: velora_build_twap_delta_order
-  description: ''
+  description: Build a Velora Delta TWAP order (time-weighted, executed slice-by-slice) from a per-slice
+    Delta route, returning UNSIGNED EIP-712 typed data. Pass `route` verbatim, `owner`, `interval` (seconds
+    between slices, min 60), `numSlices` (min 2) a
 - name: velora_submit_delta_order
-  description: ''
+  description: Submit a signed Velora Delta order (the single-order family from velora_build_delta_order).
+    Pass the `order` struct VERBATIM (the toSign.value), the externally-produced `signature`, and `chainId`.
+    Returns the created Delta auction (status,
 - name: velora_submit_twap_order
-  description: ''
+  description: Submit a signed Velora Delta TWAP order (the order built by velora_build_twap_delta_order).
+    Pass the `order` struct VERBATIM (the toSign.value, a TWAPOrder or TWAPBuyOrder), the externally-produced
+    `signature`, and `chainId`. Returns the cr
 - name: velora_get_delta_orders
-  description: ''
+  description: 'List a user''s Velora Delta orders (paginated). Pass `userAddress` (the order owner).
+    Optional filters: page, limit, chainId (array — omit for all chains), status (any of PENDING, AWAITING_SIGNATURE,
+    ACTIVE, SUSPENDED, CANCELLING, BRIDGING,'
 - name: velora_get_delta_order
-  description: ''
+  description: Fetch a single Velora Delta order by id OR hash (pass exactly one of orderId / orderHash).
+    Returns the order's current status, input/output, and transactions — use it to poll until a terminal
+    status (COMPLETED/FAILED/EXPIRED/CANCELLED/REFUN
 - name: velora_build_cancel_delta_order
-  description: ''
+  description: Build the UNSIGNED EIP-712 typed data to cancel one or more Velora Delta orders. Pass `chainId`
+    and `orderIds`. Returns { toSign } (the OrderCancellations typed data, with the resolved VeloraDelta
+    as verifyingContract). Sign it externally w
 - name: velora_submit_cancel_delta_order
-  description: ''
+  description: Submit a signed Velora Delta order cancellation. Pass `orderIds` and the externally-produced
+    `signature` from velora_build_cancel_delta_order. This server never signs — it only forwards your
+    signature.
 - name: velora_get_bridge_routes
-  description: ''
+  description: 'List Velora''s supported crosschain bridge routes (src→dest chain pairs and the dest-chain
+    output tokens each supports). Use it to validate that a crosschain pair is bridgeable before quoting/building
+    a Delta order. Optional: allowBridgeAndS'
 - name: velora_decide_execution_route
-  description: ''
+  description: 'Decide whether a trading intent should use Delta, Market, ALL, or none of the /quote modes.
+    Deterministic, rule-based guidance: MEV-protection, crosschain, limit orders, and TWAP all route to
+    Delta; OTC returns NONE because it is the August'
 - name: velora_explain_quote
-  description: ''
+  description: 'Explain a raw Velora quote response: classify it as delta or market, surface any fallbackReason
+    (Delta pricing skipped under mode=ALL), and return the safe completion path. Never mutates the payload.'
 - name: velora_validate_agent_plan
-  description: ''
+  description: 'Validate a free-form agent plan against common Velora mistakes: using `network` instead
+    of chainId, MEV intent with the wrong mode, crosschain with mode=MARKET, treating Limit Orders/TWAP
+    as RFQ, and any signing, private-key, or Delta-paylo'
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
