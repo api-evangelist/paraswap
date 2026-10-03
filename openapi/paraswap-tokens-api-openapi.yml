@@ -36,6 +36,25 @@ paths:
         '200':
           $ref: '#/components/responses/TokensResponse'
 components:
+  responses:
+    TokensResponse:
+      description: List of available tokens
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokensList'
+          example:
+            tokens:
+            - symbol: ETH
+              address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+              decimals: 18
+              img: https://img.paraswap.network/ETH.png
+              network: 1
+            - symbol: USDT
+              address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
+              decimals: 6
+              img: https://img.paraswap.network/USDT.png
+              network: 1
   schemas:
     Network:
       type: number
@@ -44,13 +63,6 @@ components:
       - 3
       - 56
       - 137
-    TokensList:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/Token'
     Token:
       type: object
       required:
@@ -98,6 +110,13 @@ components:
     TokenDecimals:
       type: integer
       minimum: 0
+    TokensList:
+      type: object
+      properties:
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/Token'
   parameters:
     Network:
       name: network
@@ -108,25 +127,6 @@ components:
         allOf:
         - $ref: '#/components/schemas/Network'
         - default: 1
-  responses:
-    TokensResponse:
-      description: List of available tokens
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TokensList'
-          example:
-            tokens:
-            - symbol: ETH
-              address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
-              decimals: 18
-              img: https://img.paraswap.network/ETH.png
-              network: 1
-            - symbol: USDT
-              address: '0xdac17f958d2ee523a2206206994597c13d831ec7'
-              decimals: 6
-              img: https://img.paraswap.network/USDT.png
-              network: 1
 externalDocs:
   description: Velora / ParaSwap Developer Documentation
   url: https://developers.velora.xyz/api/velora-api/velora-market-api
