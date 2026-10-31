@@ -64,80 +64,158 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-ParaSwap (now operating as Velora) is a DEX aggregator that enables dApps and traders to get the best token swap rates by aggregating liquidity across 170+ decentralized exchanges and liquidity pools on 12 EVM-compatible chains. The platform offers two core trading APIs and a market maker integration API, all accessible via a free public REST API at `https://api.paraswap.io`.
+ParaSwap (now Velora) is a DEX aggregator that enables dApps and traders to get the best swap rates by aggregating liquidity across 170+ DEXes and liquidity pools on 12 EVM-compatible chains. The platform offers two core APIs — the Market API for optimal route discovery and transaction building, and the Delta API for intent-based, gas-less swaps with MEV protection — plus an AugustusRFQ API for market makers to provide on-chain limit orders and peer-to-peer trading.
 
-## APIs
+**Areas:** DeFi · DEX Aggregator · Token Swaps · Blockchain · EVM · Cryptocurrency · Liquidity · Smart Contracts
 
-### Market API
-The core DEX aggregation API. Provides optimal swap routing (GET /prices), transaction call data building (POST /transactions/:network), and a combined endpoint (GET /swap). Supports Augustus smart contract v5 and v6.2. Available on all 12 networks.
+## ParaSwap on APIs.io
 
-### Delta API
-An intent-based protocol for gas-less swaps. Users sign an EIP-712 Delta Order; multiple solver agents compete to execute it with MEV protection through the Portikus Intents network. Currently available on Ethereum and Base.
+Everything profiled for ParaSwap is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paraswap/](https://apis.io/providers/paraswap/)** — or go straight to one of the APIs or properties below.
 
-### AugustusRFQ API
-Market maker integration API for providing on-chain limit orders, RFQ quotes, and P2P trades for both fungible (ERC-20) and NFT tokens. Implements optional HMAC-SHA256 authentication and optional WebSocket price streaming.
+### APIs (6)
 
-### Tokens API
-Returns the curated token list for any supported network (GET /tokens/:network).
+- [ParaSwap Delta API](https://apis.io/apis/paraswap/paraswap-delta-api/) — The Velora Delta API is an intent-based protocol that enables gas-less token swaps where multiple agents compete to execute trades on behalf of users. Users…
+- [ParaSwap AugustusRFQ API](https://apis.io/apis/paraswap/paraswap-augustusrfq-api/) — The AugustusRFQ API enables market makers to integrate with ParaSwap's on-chain limit order and Request-for-Quote system, supporting fungible token (ERC-20)…
+- [ParaSwap Subgraphs (GraphQL)](https://apis.io/apis/paraswap/paraswap-subgraphs/) — ParaSwap exposes TheGraph subgraphs for historical swap data and limit order/RFQ activity across multiple networks. Augustus v5 subgraphs cover standard DEX…
+- [ParaSwap Prices API](https://apis.io/apis/paraswap/paraswap-prices-api/) — Get swap path and pricing.
+- [ParaSwap Tokens API](https://apis.io/apis/paraswap/paraswap-tokens-api/) — Retrieves the curated list of tokens supported across all ParaSwap-integrated networks. Returns token metadata including symbol, contract address, decimals,…
+- [ParaSwap Transactions API](https://apis.io/apis/paraswap/paraswap-transactions-api/) — Build parameters for a transaction
 
-### Subgraphs (GraphQL)
-TheGraph subgraphs provide historical swap data (Augustus v5) and limit order/RFQ activity (AugustusRFQ) across Ethereum, Arbitrum, Avalanche, Base, BSC, Optimism, and Polygon.
+### Published properties
 
-## Supported Networks
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Chain | Chain ID |
-|-------|----------|
-| Ethereum | 1 |
-| Optimism | 10 |
-| BSC | 56 |
-| Gnosis | 100 |
-| Polygon | 137 |
-| Sonic | 146 |
-| Arbitrum | 42161 |
-| Avalanche | 43114 |
-| Base | 8453 |
-| Unichain | 130 |
-| Plasma | 9745 |
+#### GraphQL (1)
 
-## Base URL
+GraphQL schemas.
 
-```
-https://api.paraswap.io
-```
+- [ParaSwap GraphQL API](https://apis.io/graphqls/paraswap/paraswap-graphql/)
 
-## Key Endpoints
+#### MCP servers (1)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | /prices | Get optimal swap route and price quote |
-| POST | /transactions/:network | Build transaction call data |
-| GET | /swap | Combined price + calldata |
-| GET | /tokens/:network | Get supported token list |
-| GET | /quote | Delta API price quote |
-| POST | /delta/orders/build | Build Delta order for signing |
-| POST | /orders | Submit signed Delta order |
-| GET | /orders/{id} | Track Delta order status |
+Model Context Protocol servers that expose the API to agents.
 
-## Authentication
+- [paraswap](https://apis.io/servers/paraswap/paraswap/)
 
-Public endpoints require no API key. Enterprise dedicated API keys are available for high-throughput production integrations.
+#### Agentic access (1)
 
-## Partner Fee Model
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Integrators can register as partners to earn revenue on swaps routed through their integration. Two models are available:
-- Surplus model: up to 50% of positive price surplus (capped at 1% in v6.2)
-- Flat fee model: up to 2% of swap amount
+- [Paraswap Agentic Access](https://apis.io/agentic-access/paraswap/paraswap-agentic-access/)
 
-## SDK
+#### JSON Schema (2)
 
-- TypeScript/JavaScript: `@paraswap/sdk` (npm)
-- Python: Available via VeloraDEX GitHub
-- GitHub: https://github.com/VeloraDEX/sdk
+The data models the API reads and writes.
 
-## Resources
+- [ParaSwap PriceRoute](https://apis.io/schemas/paraswap/price-route/)
+- [ParaSwap Token](https://apis.io/schemas/paraswap/token/)
 
-- Developer Docs: https://developers.velora.xyz/
-- App: https://app.velora.xyz/
-- GitHub: https://github.com/VeloraDEX
-- Security Audits: https://developers.velora.xyz/security
-- Subgraphs: https://developers.velora.xyz/subgraphs
+#### Examples (3)
+
+Example requests and responses.
+
+- [Build Transaction](https://apis.io/examples/paraswap/build-transaction/)
+- [Get Prices Eth Usdc](https://apis.io/examples/paraswap/get-prices-eth-usdc/)
+- [Get Tokens](https://apis.io/examples/paraswap/get-tokens/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [ParaSwap Market API v5 prices API](https://apis.io/collections/paraswap/open-paraswap-prices-api/)
+- [ParaSwap Market API v5 prices tokens API](https://apis.io/collections/paraswap/open-paraswap-tokens-api/)
+- [ParaSwap Market API v5 prices transactions API](https://apis.io/collections/paraswap/open-paraswap-transactions-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [ParaSwap — jsonschema rules](https://apis.io/rules/paraswap/paraswap-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Paraswap Domain Security](https://apis.io/security/paraswap/paraswap-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/paraswap/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/paraswap/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/paraswap/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.velora.xyz/)
+- [Documentation](https://developers.velora.xyz/api/velora-api)
+- [Blog](https://velora.xyz/blog)
+- [GitHub](https://github.com/VeloraDEX)
+
+## API Evangelist rating
+
+**Kin Score 25.4** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 47.4 |
+| Contract governance | 9.8 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 7.9 |
+
+**Agent readiness 32.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paraswap/](https://apis.io/providers/paraswap/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ParaSwap: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paraswap/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
